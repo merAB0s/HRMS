@@ -10,16 +10,15 @@ import kodlamaio.hrms.dataAccess.abstracts.JobPositionDao;
 import kodlamaio.hrms.entities.concretes.JobPosition;
 
 @Service
-public class JobPositionManager implements JobPositionService{
-	
+public class JobPositionManager implements JobPositionService {
+
 	private JobPositionDao jobPositionDao;
-	
+
 	@Autowired
 	public JobPositionManager(JobPositionDao jobPositionDao) {
 		super();
 		this.jobPositionDao = jobPositionDao;
 	}
-
 
 	@Override
 	public List<JobPosition> getAll() {
