@@ -25,7 +25,7 @@ public class JobPosition {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="title")
-	private String title;
+	@Column(name="position")
+	private String position;
 
 }
