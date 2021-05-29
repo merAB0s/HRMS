@@ -1,4 +1,4 @@
-package hrms.emailVerification;
+package hrms.zEmailVerification;
 
 public class emailSender {
 

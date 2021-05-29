@@ -2,7 +2,7 @@ package hrms.core.adaptors;
 
 import org.springframework.stereotype.Service;
 
-import hrms.emailVerification.emailSender;
+import hrms.zEmailVerification.emailSender;
 
 @Service
 public class emailSenderAdaptor implements emailAdaptor {

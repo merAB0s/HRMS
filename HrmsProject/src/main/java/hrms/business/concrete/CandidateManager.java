@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hrms.FakeMernis.UserValidationService;
 import hrms.business.abstracts.CandidateService;
 import hrms.core.utilities.business.BusinessRules;
 import hrms.core.utilities.results.DataResult;
@@ -15,6 +14,7 @@ import hrms.core.utilities.results.SuccessDataResult;
 import hrms.core.utilities.results.SuccessResult;
 import hrms.dataAccess.abstracts.CandidateDao;
 import hrms.entities.concretes.Candidate;
+import hrms.zFakeMernis.UserValidationService;
 
 @Service
 public class CandidateManager implements CandidateService {

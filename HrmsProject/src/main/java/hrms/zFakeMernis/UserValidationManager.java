@@ -1,4 +1,4 @@
-package hrms.FakeMernis;
+package hrms.zFakeMernis;
 
 import org.springframework.stereotype.Service;
 
