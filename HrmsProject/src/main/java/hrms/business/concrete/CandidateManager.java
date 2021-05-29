@@ -38,7 +38,7 @@ public class CandidateManager implements CandidateService {
 	@Override
 	public Result add(Candidate candidate) {
 
-		Result result = BusinessRules.run(identityNumberControl(candidate), mernisControl(candidate));
+		Result result = BusinessRules.run(identityNumberControl(candidate));
 
 		if (result.isSuccess()) {
 			candidateDao.save(candidate);
