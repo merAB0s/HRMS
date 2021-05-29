@@ -56,12 +56,12 @@ public class JobAdvertisement {
 	private int quota;
 
 	@Column(name = "application_deadline")
-	private Date applicationDeadLine;
+	private LocalDate applicationDeadLine;
 
 	@Column(name="created_date")
 	private LocalDateTime createdDate;
 	
 	@Column(name="is_active")
-	private boolean isActive = true;
+	private boolean isActive;
 
 }
