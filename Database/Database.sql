@@ -3,112 +3,174 @@
 BEGIN;
 
 
-CREATE TABLE public.candidate_users
+CREATE TABLE public.activation_code_to_candidates
 (
     id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    surname character varying(50) NOT NULL,
-    national_identity character varying(11) NOT NULL,
-    birth_year character varying(4) NOT NULL,
-    verify boolean,
+    candidate_id integer NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE public.confirm_employer_users
+CREATE TABLE public.activation_code_to_employers
 (
     id integer NOT NULL,
     employer_id integer NOT NULL,
-    confirmed_staff_user integer,
-    confirmed_date timestamp with time zone,
-    is_confirmed boolean,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE public.employer_users
-(
-    user_id integer NOT NULL,
-    company_name character varying(100) NOT NULL,
-    web_address character varying(50) NOT NULL,
-    phone_number character varying(11) NOT NULL,
-    verify boolean,
-    user_confirm boolean,
-    PRIMARY KEY (user_id)
-);
-
-CREATE TABLE public.job_positions
+CREATE TABLE public.activation_codes
 (
     id integer NOT NULL,
-    "position" character varying NOT NULL,
+    activation_code character varying(38) NOT NULL,
+    is_confirmed boolean NOT NULL,
+    confirmed_date date NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE public.staff_users
+CREATE TABLE public.candidates
 (
-    user_id integer NOT NULL,
-    name character varying NOT NULL,
-    surname character varying NOT NULL,
-    verify boolean,
-    PRIMARY KEY (user_id)
+    id integer NOT NULL,
+    first_name character varying(25) NOT NULL,
+    last_name character varying(25) NOT NULL,
+    identity_number character varying(11) NOT NULL,
+    birth_date date NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.cities
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 82 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    city_name character varying(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.employees
+(
+    id integer NOT NULL,
+    first_name character varying(25) NOT NULL,
+    last_name character varying(25) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.employer_activation_by_employees
+(
+    id integer NOT NULL,
+    employer_id integer NOT NULL,
+    confirmed_employee_id integer,
+    is_confirmed boolean NOT NULL,
+    confirmed_date date,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.employers
+(
+    id integer NOT NULL,
+    company_name character varying(255) NOT NULL,
+    web_address character varying(50) NOT NULL,
+    phone_number character varying(12) NOT NULL,
+    is_activated boolean NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.job_advertisements
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    employer_id integer NOT NULL,
+    job_title_id integer NOT NULL,
+    description text NOT NULL,
+    city_id integer NOT NULL,
+    quota integer NOT NULL,
+    application_deadline date NOT NULL,
+    created_date time without time zone NOT NULL,
+    is_active boolean NOT NULL,
+    min_salary double precision NOT NULL,
+    max_salary double precision NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.job_titles
+(
+    id integer NOT NULL,
+    title character varying(50) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE public.users
 (
     id integer NOT NULL,
-    mail character varying(50) NOT NULL,
-    password character varying(16) NOT NULL,
+    email character varying(50) NOT NULL,
+    password character varying(25) NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE public.users_verify
-(
-    id integer NOT NULL,
-    verify_code character varying NOT NULL,
-    is_confirmed boolean,
-    created_date date,
-    confirmed_date date,
-    user_id integer NOT NULL,
-    PRIMARY KEY (id)
-);
-
-ALTER TABLE public.candidate_users
-    ADD FOREIGN KEY (id)
-    REFERENCES public.users (id)
+ALTER TABLE public.activation_code_to_candidates
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (id)
     NOT VALID;
 
 
-ALTER TABLE public.confirm_employer_users
-    ADD FOREIGN KEY (confirmed_staff_user)
-    REFERENCES public.staff_users (user_id)
-    NOT VALID;
-
-
-ALTER TABLE public.confirm_employer_users
+ALTER TABLE public.activation_code_to_employers
     ADD FOREIGN KEY (employer_id)
-    REFERENCES public.employer_users (user_id)
+    REFERENCES public.employers (id)
     NOT VALID;
 
 
-ALTER TABLE public.confirm_employer_users
+ALTER TABLE public.activation_codes
     ADD FOREIGN KEY (id)
-    REFERENCES public.users_verify (id)
+    REFERENCES public.activation_code_to_candidates (id)
     NOT VALID;
 
 
-ALTER TABLE public.employer_users
-    ADD FOREIGN KEY (user_id)
+ALTER TABLE public.activation_codes
+    ADD FOREIGN KEY (id)
+    REFERENCES public.activation_code_to_employers (id)
+    NOT VALID;
+
+
+ALTER TABLE public.candidates
+    ADD FOREIGN KEY (id)
     REFERENCES public.users (id)
     NOT VALID;
 
 
-ALTER TABLE public.staff_users
-    ADD FOREIGN KEY (user_id)
+ALTER TABLE public.employees
+    ADD FOREIGN KEY (id)
     REFERENCES public.users (id)
     NOT VALID;
 
 
-ALTER TABLE public.users_verify
-    ADD FOREIGN KEY (user_id)
+ALTER TABLE public.employer_activation_by_employees
+    ADD FOREIGN KEY (confirmed_employee_id)
+    REFERENCES public.employees (id)
+    NOT VALID;
+
+
+ALTER TABLE public.employer_activation_by_employees
+    ADD FOREIGN KEY (employer_id)
+    REFERENCES public.employers (id)
+    NOT VALID;
+
+
+ALTER TABLE public.employers
+    ADD FOREIGN KEY (id)
     REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (city_id)
+    REFERENCES public.cities (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (employer_id)
+    REFERENCES public.employers (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (job_title_id)
+    REFERENCES public.job_titles (id)
     NOT VALID;
 
 END;
