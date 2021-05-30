@@ -62,6 +62,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 				NullControl(jobAdvertisement),
 				minSalaryControl(jobAdvertisement),
 				quotaControl(jobAdvertisement),
+				advertisementDateRequirement(jobAdvertisement),
 				minEqualsMaxControl(jobAdvertisement));
 
 		if (result.isSuccess()) {
@@ -134,7 +135,13 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		return new SuccessResult();
 	}
 	
-	
+		
+	private Result advertisementDateRequirement(JobAdvertisement jobAdvertisement) {
+		if (jobAdvertisement.getApplicationDeadline().isBefore(LocalDate.now())) {
+			return new ErrorResult("Son Başuru Tarihi Şuan ki Tarihten Geç Olamaz!");
+		}
+		return new SuccessResult();
+	}
 	
 	
 	
