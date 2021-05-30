@@ -1,6 +1,6 @@
 package hrms.entities.concretes;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -56,7 +56,7 @@ public class JobAdvertisement {
 	private int quota;
 
 	@Column(name = "application_deadline")
-	private LocalDate applicationDeadLine;
+	private LocalDate applicationDeadline;
 
 	@Column(name="created_date")
 	private LocalDateTime createdDate;

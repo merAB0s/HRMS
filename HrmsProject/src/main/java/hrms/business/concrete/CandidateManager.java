@@ -21,9 +21,9 @@ public class CandidateManager implements CandidateService {
 
 	private CandidateDao candidateDao;
 	private UserValidationService validationService;
-	
+
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao,UserValidationService validationService) {
+	public CandidateManager(CandidateDao candidateDao, UserValidationService validationService) {
 		super();
 		this.candidateDao = candidateDao;
 		this.validationService = validationService;
@@ -41,6 +41,7 @@ public class CandidateManager implements CandidateService {
 		Result result = BusinessRules.run(identityNumberControl(candidate));
 
 		if (result.isSuccess()) {
+
 			candidateDao.save(candidate);
 			return new SuccessResult("Eklendi.");
 		}
@@ -51,11 +52,11 @@ public class CandidateManager implements CandidateService {
 	///////////////// KURALLAR////////////////////////
 
 	private Result mernisControl(Candidate candidate) {
-		
+
 		if (validationService.validate(candidate) == false) {
 			return new ErrorResult("Mernis doğrulaması gerçekleşmedi");
 		}
-		return new SuccessResult();	
+		return new SuccessResult();
 	}
 
 	private Result identityNumberControl(Candidate candidate) {

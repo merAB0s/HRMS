@@ -10,7 +10,16 @@ public interface JobAdvertisementService {
 	
 	DataResult<List<JobAdvertisement>> getAll();
 	
+	DataResult<List<JobAdvertisement>> getAllByIsActiveTrue();
+	
+	DataResult<List<JobAdvertisement>> getByisActiveTrueOrderByApplicationDeadlineAsc();
+	
+	DataResult<List<JobAdvertisement>> getByisActiveTrueAndEmployerId(int id);
+	
 	Result add(JobAdvertisement jobAdvertisement);
+	
+	Result update(int jobAdvertisementId , JobAdvertisement jobAdvertisement);
+
 	
 	
 
