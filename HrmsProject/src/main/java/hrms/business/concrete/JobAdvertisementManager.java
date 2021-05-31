@@ -3,6 +3,7 @@ package hrms.business.concrete;
 import java.time.LocalDate;
 import java.util.List;
 
+import hrms.entities.dtos.JobAdvertisementAndEmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	@Override
 	public DataResult<List<JobAdvertisement>> getByisActiveTrueAndEmployerId(int id) {
 		return new SuccessDataResult<List<JobAdvertisement>>(jobAdvertisementDao.getByisActiveTrueAndEmployer_Id(id));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisementAndEmployerDto>> getAdvertisementWithEmployerDetails() {
+		return new SuccessDataResult<List<JobAdvertisementAndEmployerDto>>(this.jobAdvertisementDao.getAdvertisementWithEmployerDetails());
 	}
 
 	@Override

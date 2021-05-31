@@ -2,6 +2,7 @@ package hrms.api.controllers;
 
 import java.util.List;
 
+import hrms.entities.dtos.JobAdvertisementAndEmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +50,14 @@ public class JobAdvertisementController {
 		return this.jobAdvertisementService.getByisActiveTrueAndEmployerId(id);
 	}
 
-	@PostMapping("/add")
+	@GetMapping("getAdvertisementWithEmployerDetails")
+	public DataResult<List<JobAdvertisementAndEmployerDto>> getAdvertisementWithEmployerDetails(){
+		return this.jobAdvertisementService.getAdvertisementWithEmployerDetails();
+	}
+
+
+
+		@PostMapping("/add")
 	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
 
 		return this.jobAdvertisementService.add(jobAdvertisement);
