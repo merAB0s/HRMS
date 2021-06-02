@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import hrms.entities.abstracts.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,5 +39,12 @@ public class Candidate extends User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "candidate")
 	private List<SchoolCandidate> SchoolCandidate ;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidate")
+	private List<LanguageCandidate> languageCandidates;
+
+
+
 
 }
