@@ -31,6 +31,11 @@ public class SchoolCandidateManager implements SchoolCandidateService {
     }
 
     @Override
+    public DataResult<List<SchoolCandidate>> getByCandidate_CandidateId(int candidateId) {
+        return new SuccessDataResult<List<SchoolCandidate>>(schoolCandidateDao.getByCandidate_Id(candidateId));
+    }
+
+    @Override
     public Result add(SchoolCandidate schoolCandidate) {
         schoolCandidateDao.save(schoolCandidate);
         return new SuccessResult("Başarıyla Eklendi.");

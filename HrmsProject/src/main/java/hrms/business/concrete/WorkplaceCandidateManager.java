@@ -29,6 +29,11 @@ public class WorkplaceCandidateManager implements WorkplaceCandidateService {
     }
 
     @Override
+    public DataResult<List<WorkplaceCandidate>> getByCandidate_CandidateId(int candidateId) {
+        return new SuccessDataResult<List<WorkplaceCandidate>>(workplaceCandidateDao.getByCandidate_Id(candidateId));
+    }
+
+    @Override
     public Result add(WorkplaceCandidate workplaceCandidate) {
         workplaceCandidateDao.save(workplaceCandidate);
         return new SuccessResult("Başarıyla Eklendi.");

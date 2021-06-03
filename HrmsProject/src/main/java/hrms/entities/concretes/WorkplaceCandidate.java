@@ -1,11 +1,13 @@
 package hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -37,6 +39,7 @@ public class WorkplaceCandidate {
 
     @Column(name = "date_of_quit")
     private LocalDate dateOfQuit;
+
 
 
 }

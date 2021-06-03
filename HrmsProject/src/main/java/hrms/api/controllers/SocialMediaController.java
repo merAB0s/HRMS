@@ -5,6 +5,7 @@ import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.LinkType;
 import hrms.entities.concretes.SocialMedia;
+import hrms.entities.concretes.WorkplaceCandidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,11 @@ public class SocialMediaController {
     @PostMapping("/add")
     public Result add(@RequestBody SocialMedia socialMedia) {
         return this.socialMediaService.add(socialMedia);
+    }
+
+    @GetMapping("/getByCandidateId")
+    public DataResult<List<SocialMedia>> getByCandidate_CandidateId(@RequestParam int candidateId){
+        return socialMediaService.getByCandidate_CandidateId(candidateId);
     }
 
 }

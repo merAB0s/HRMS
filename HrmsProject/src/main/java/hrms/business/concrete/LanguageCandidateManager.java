@@ -29,6 +29,11 @@ public class LanguageCandidateManager implements LanguageCandidateService {
     }
 
     @Override
+    public DataResult<List<LanguageCandidate>> getByCandidate_CandidateId(int candidateId) {
+        return new SuccessDataResult<List<LanguageCandidate>>(languageCandidateDao.getByCandidate_Id(candidateId));
+    }
+
+    @Override
     public Result add(LanguageCandidate languageCandidate) {
         languageCandidateDao.save(languageCandidate);
         return new SuccessResult("Başarıyla Eklendi.");

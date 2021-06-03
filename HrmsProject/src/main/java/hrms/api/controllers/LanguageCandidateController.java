@@ -5,6 +5,7 @@ import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.Language;
 import hrms.entities.concretes.LanguageCandidate;
+import hrms.entities.concretes.WorkplaceCandidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,11 @@ public class LanguageCandidateController {
     @PostMapping("/add")
     public Result add(@RequestBody LanguageCandidate languageCandidate) {
         return this.languageCandidateService.add(languageCandidate);
+    }
+
+    @GetMapping("/getByCandidateId")
+    public DataResult<List<LanguageCandidate>> getByCandidate_CandidateId(@RequestParam int candidateId){
+        return languageCandidateService.getByCandidate_CandidateId(candidateId);
     }
 
 

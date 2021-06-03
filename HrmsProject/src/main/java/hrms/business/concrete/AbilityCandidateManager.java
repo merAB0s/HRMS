@@ -29,6 +29,11 @@ public class AbilityCandidateManager implements AbilityCandidateService {
     }
 
     @Override
+    public DataResult<List<AbilityCandidate>> getByCandidate_CandidateId(int candidateId) {
+        return new SuccessDataResult<List<AbilityCandidate>>(abilityCandidatesDao.getByCandidate_Id(candidateId));
+    }
+
+    @Override
     public Result add(AbilityCandidate abilityCandidate) {
         abilityCandidatesDao.save(abilityCandidate);
         return new SuccessResult("Başarıyla Oluşturuldu.");

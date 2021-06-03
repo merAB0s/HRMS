@@ -1,10 +1,12 @@
 package hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +28,6 @@ public class AbilityCandidate {
     @ManyToOne()
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
+
+
 }

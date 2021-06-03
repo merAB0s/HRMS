@@ -10,5 +10,7 @@ public interface AbilityCandidateService {
 
     DataResult<List<AbilityCandidate>> getAll();
 
+    DataResult<List<AbilityCandidate>> getByCandidate_CandidateId(int candidateId);
+
     Result add(AbilityCandidate abilityCandidate);
 }
