@@ -29,7 +29,7 @@ public class LanguageCandidateManager implements LanguageCandidateService {
     }
 
     @Override
-    public DataResult<List<LanguageCandidate>> getByCandidate_CandidateId(int candidateId) {
+    public DataResult<List<LanguageCandidate>> getByCandidateId(int candidateId) {
         return new SuccessDataResult<List<LanguageCandidate>>(languageCandidateDao.getByCandidate_Id(candidateId));
     }
 

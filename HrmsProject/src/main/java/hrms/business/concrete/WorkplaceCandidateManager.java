@@ -29,7 +29,7 @@ public class WorkplaceCandidateManager implements WorkplaceCandidateService {
     }
 
     @Override
-    public DataResult<List<WorkplaceCandidate>> getByCandidate_CandidateId(int candidateId) {
+    public DataResult<List<WorkplaceCandidate>> getByCandidateId(int candidateId) {
         return new SuccessDataResult<List<WorkplaceCandidate>>(workplaceCandidateDao.getByCandidate_Id(candidateId));
     }
 

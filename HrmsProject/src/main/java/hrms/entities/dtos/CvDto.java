@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class cvDto implements Dto {
+public class CvDto implements Dto {
 
         @JsonIgnore
         private Candidate candidate;
@@ -20,7 +20,7 @@ public class cvDto implements Dto {
         private List<SchoolCandidate> schoolCandidates;
         private List<LanguageCandidate> languageCandidates;
         private List<WorkplaceCandidate> workplaceCandidates;
-        private List<SocialMedia> socialMedia;
+        private List<SocialMedia> socialMedias;
         private List<AbilityCandidate> abilityCandidates;
 
 

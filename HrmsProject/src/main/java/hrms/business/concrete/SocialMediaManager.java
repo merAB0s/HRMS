@@ -29,7 +29,7 @@ public class SocialMediaManager implements SocialMediaService {
     }
 
     @Override
-    public DataResult<List<SocialMedia>> getByCandidate_CandidateId(int candidateId) {
+    public DataResult<List<SocialMedia>> getByCandidateId(int candidateId) {
         return new SuccessDataResult<List<SocialMedia>>(socialMediaDao.getByCandidate_Id(candidateId));
     }
 

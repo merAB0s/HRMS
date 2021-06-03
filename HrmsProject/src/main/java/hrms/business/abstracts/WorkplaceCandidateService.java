@@ -12,7 +12,7 @@ public interface WorkplaceCandidateService {
 
     DataResult<List<WorkplaceCandidate>> getAll();
 
-    DataResult<List<WorkplaceCandidate>> getByCandidate_CandidateId(int candidateId);
+    DataResult<List<WorkplaceCandidate>> getByCandidateId(int candidateId);
 
     Result add(WorkplaceCandidate workplaceCandidate);
 }

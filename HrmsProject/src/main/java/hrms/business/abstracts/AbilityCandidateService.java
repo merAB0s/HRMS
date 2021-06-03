@@ -10,7 +10,7 @@ public interface AbilityCandidateService {
 
     DataResult<List<AbilityCandidate>> getAll();
 
-    DataResult<List<AbilityCandidate>> getByCandidate_CandidateId(int candidateId);
+    DataResult<List<AbilityCandidate>> getByCandidateId(int candidateId);
 
     Result add(AbilityCandidate abilityCandidate);
 }

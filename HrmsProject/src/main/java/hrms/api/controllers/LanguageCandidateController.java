@@ -33,8 +33,8 @@ public class LanguageCandidateController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<LanguageCandidate>> getByCandidate_CandidateId(@RequestParam int candidateId){
-        return languageCandidateService.getByCandidate_CandidateId(candidateId);
+    public DataResult<List<LanguageCandidate>> getByCandidatId(@RequestParam int candidateId){
+        return languageCandidateService.getByCandidateId(candidateId);
     }
 
 

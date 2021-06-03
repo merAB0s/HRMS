@@ -31,7 +31,7 @@ public class SchoolCandidateManager implements SchoolCandidateService {
     }
 
     @Override
-    public DataResult<List<SchoolCandidate>> getByCandidate_CandidateId(int candidateId) {
+    public DataResult<List<SchoolCandidate>> getByCandidateId(int candidateId) {
         return new SuccessDataResult<List<SchoolCandidate>>(schoolCandidateDao.getByCandidate_Id(candidateId));
     }
 

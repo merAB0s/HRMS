@@ -32,8 +32,8 @@ public class WorkplaceCandidateController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<WorkplaceCandidate>> getByCandidate_CandidateId(@RequestParam int candidateId){
-        return workplaceCandidateService.getByCandidate_CandidateId(candidateId);
+    public DataResult<List<WorkplaceCandidate>> getByCandidateId(@RequestParam int candidateId){
+        return workplaceCandidateService.getByCandidateId(candidateId);
     }
 
 

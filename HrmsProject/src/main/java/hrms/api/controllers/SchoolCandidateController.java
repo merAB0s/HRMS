@@ -38,8 +38,8 @@ public class SchoolCandidateController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<SchoolCandidate>> getByCandidate_CandidateId(@RequestParam int candidateId){
-        return schoolCandidateServiceService.getByCandidate_CandidateId(candidateId);
+    public DataResult<List<SchoolCandidate>> getByCandidateId(@RequestParam int candidateId){
+        return schoolCandidateServiceService.getByCandidateId(candidateId);
     }
 
 

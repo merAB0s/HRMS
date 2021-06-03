@@ -11,7 +11,7 @@ public interface SchoolCandidateService {
 
     DataResult<List<SchoolCandidate>> getAll();
 
-    DataResult<List<SchoolCandidate>> getByCandidate_CandidateId(int candidateId);
+    DataResult<List<SchoolCandidate>> getByCandidateId(int candidateId);
 
     Result add(SchoolCandidate schoolCandidate);
 }

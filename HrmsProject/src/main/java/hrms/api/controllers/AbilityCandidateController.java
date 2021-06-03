@@ -32,8 +32,8 @@ public class AbilityCandidateController {
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<AbilityCandidate>> getByCandidate_CandidateId(@RequestParam int candidateId){
-        return abilityCandidateService.getByCandidate_CandidateId(candidateId);
+    public DataResult<List<AbilityCandidate>> getByCandidateId(@RequestParam int candidateId){
+        return abilityCandidateService.getByCandidateId(candidateId);
     }
 
 

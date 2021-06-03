@@ -29,7 +29,7 @@ public class AbilityCandidateManager implements AbilityCandidateService {
     }
 
     @Override
-    public DataResult<List<AbilityCandidate>> getByCandidate_CandidateId(int candidateId) {
+    public DataResult<List<AbilityCandidate>> getByCandidateId(int candidateId) {
         return new SuccessDataResult<List<AbilityCandidate>>(abilityCandidatesDao.getByCandidate_Id(candidateId));
     }
 
