@@ -20,6 +20,7 @@ import hrms.zFakeMernis.UserValidationService;
 @Service
 public class CandidateManager implements CandidateService {
 
+	private ActivationCodeService activationCodeService;
 	private CandidateDao candidateDao;
 	private UserValidationService validationService;
 	private WorkplaceCandidateService workplaceCandidateService;
@@ -27,15 +28,16 @@ public class CandidateManager implements CandidateService {
 	private SchoolCandidateService schoolCandidateService;
 	private AbilityCandidateService abilityCandidateService;
 	private LanguageCandidateService languageCandidateService;
+	private CvDetailService cvDetailService;
 
 
 
 
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao, UserValidationService validationService,
+	public CandidateManager(CandidateDao candidateDao, UserValidationService validationService,ActivationCodeService activationCodeService,
 							WorkplaceCandidateService workplaceCandidateService, SocialMediaService socialMediaService,
 							SchoolCandidateService schoolCandidateService, AbilityCandidateService abilityCandidateService,
-							LanguageCandidateService languageCandidateService) {
+							LanguageCandidateService languageCandidateService,CvDetailService cvDetailService) {
 		super();
 		this.candidateDao = candidateDao;
 		this.validationService = validationService;
@@ -44,6 +46,7 @@ public class CandidateManager implements CandidateService {
 		this.schoolCandidateService = schoolCandidateService;
 		this.abilityCandidateService = abilityCandidateService;
 		this.languageCandidateService = languageCandidateService;
+		this.cvDetailService = cvDetailService;
 
 	}
 
@@ -59,11 +62,13 @@ public class CandidateManager implements CandidateService {
 		Result result = BusinessRules.run(identityNumberControl(candidate));
 
 		if (result.isSuccess()) {
-
 			candidateDao.save(candidate);
-			return new SuccessResult("Eklendi.");
+
+			activationCodeService.sendVerificationCode(candidate.getId());
+			return new SuccessResult("Başarıyla Aday Eklendi!");
 		}
-		return result;
+
+		return new ErrorResult(result.getMessage());
 
 	}
 
@@ -76,6 +81,7 @@ public class CandidateManager implements CandidateService {
 		cvDto.setSchoolCandidates(this.schoolCandidateService.getByCandidateId(candidateId).getData());
 		cvDto.setSocialMedias(this.socialMediaService.getByCandidateId(candidateId).getData());
 		cvDto.setWorkplaceCandidates(this.workplaceCandidateService.getByCandidateId(candidateId).getData());
+		cvDto.setCvDetail(this.cvDetailService.getByCandidateId(candidateId).getData());
 		return new SuccessDataResult<CvDto>(cvDto,"Başaryıla CV Getirildi.");
 	}
 

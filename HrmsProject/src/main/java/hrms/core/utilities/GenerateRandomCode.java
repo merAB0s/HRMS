@@ -1,22 +1,15 @@
 package hrms.core.utilities;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class GenerateRandomCode {
 
-	public String create() {
-
-		int leftLimit = 97; // letter 'a'
-		int rightLimit = 122; // letter 'z'
-		int targetStringLength = 30;
-
-			Random random = new Random();
-			
-		String generetedString = random.ints(leftLimit, rightLimit +1)
-				.limit(targetStringLength)
-				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-				.toString();
-		return generetedString;
+	public UUID generate(){
+		UUID code = UUID.randomUUID();
+		return code;
 	}
+
+
 
 }

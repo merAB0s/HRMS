@@ -22,6 +22,7 @@ public class CvDto implements Dto {
         private List<WorkplaceCandidate> workplaceCandidates;
         private List<SocialMedia> socialMedias;
         private List<AbilityCandidate> abilityCandidates;
+        private CvDetail cvDetail;
 
 
 

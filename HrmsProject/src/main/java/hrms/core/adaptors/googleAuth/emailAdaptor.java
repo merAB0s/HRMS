@@ -1,4 +1,4 @@
-package hrms.core.adaptors;
+package hrms.core.adaptors.googleAuth;
 
 public interface emailAdaptor {
 

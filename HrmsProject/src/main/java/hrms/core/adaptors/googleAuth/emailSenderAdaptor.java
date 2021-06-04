@@ -1,5 +1,6 @@
-package hrms.core.adaptors;
+package hrms.core.adaptors.googleAuth;
 
+import hrms.core.adaptors.googleAuth.emailAdaptor;
 import org.springframework.stereotype.Service;
 
 import hrms.zEmailVerification.emailSender;

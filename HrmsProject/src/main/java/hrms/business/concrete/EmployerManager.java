@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import hrms.business.abstracts.ActivationCodeService;
 import org.springframework.stereotype.Service;
 
 import hrms.business.abstracts.EmployerService;
-import hrms.core.adaptors.emailAdaptor;
+import hrms.core.adaptors.googleAuth.emailAdaptor;
 import hrms.core.utilities.business.BusinessRules;
 import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.ErrorResult;
@@ -22,11 +23,13 @@ public class EmployerManager implements EmployerService {
 
 	private EmployerDao employerDao;
 	private emailAdaptor adaptor;
+	private ActivationCodeService activationCodeService;
 
-	public EmployerManager(EmployerDao employerDao, emailAdaptor adaptor) {
+	public EmployerManager(EmployerDao employerDao, emailAdaptor adaptor,ActivationCodeService activationCodeService) {
 		super();
 		this.employerDao = employerDao;
 		this.adaptor = adaptor;
+		this.activationCodeService = activationCodeService;
 	}
 
 	@Override
@@ -42,11 +45,12 @@ public class EmployerManager implements EmployerService {
 		Result result = BusinessRules.run(emailExist(employer.getEmail()), nullControl(employer));
 
 		if (result.isSuccess()) {
-
 			employerDao.save(employer);
-			return new SuccessResult("Eklendi.");
+			activationCodeService.sendVerificationCode(employer.getId());
+			return new SuccessResult("Başarıyla Eklendi!");
 		}
-		return result;
+
+		return new ErrorResult(result.getMessage());
 
 	}
 
