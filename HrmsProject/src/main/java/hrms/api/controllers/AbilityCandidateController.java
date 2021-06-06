@@ -6,8 +6,10 @@ import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.AbilityCandidate;
 import hrms.entities.concretes.WorkplaceCandidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,18 +24,18 @@ public class AbilityCandidateController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<AbilityCandidate>> getAll() {
-        return this.abilityCandidateService.getAll();
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(abilityCandidateService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody AbilityCandidate abilityCandidate) {
-        return this.abilityCandidateService.add(abilityCandidate);
+    public ResponseEntity<?> add(@Valid @RequestBody AbilityCandidate abilityCandidate) {
+        return ResponseEntity.ok(abilityCandidateService.add(abilityCandidate));
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<AbilityCandidate>> getByCandidateId(@RequestParam int candidateId){
-        return abilityCandidateService.getByCandidateId(candidateId);
+    public ResponseEntity<?> getByCandidateId(@RequestParam int candidateId){
+        return ResponseEntity.ok(abilityCandidateService.getByCandidateId(candidateId));
     }
 
 

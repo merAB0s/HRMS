@@ -6,9 +6,11 @@ import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.CvDetail;
 import hrms.entities.concretes.WorkplaceCandidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,33 +18,30 @@ import java.util.List;
 public class CvDetailController {
 
     private CvDetailService cvDetailService;
-
     @Autowired
     public CvDetailController(CvDetailService cvDetailService) {
         this.cvDetailService = cvDetailService;
     }
 
-    @GetMapping("/getall")
-    public DataResult<List<CvDetail>> getAll() {
-        return this.cvDetailService.getAll();
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(cvDetailService.getAll());
+    }
+
+    @GetMapping("/getByCandidateId")
+    public ResponseEntity<?> getByCandidateId(int candidateId){
+        return ResponseEntity.ok(cvDetailService.getByCandidateId(candidateId));
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody CvDetail cvDetail) {
-        return this.cvDetailService.add(cvDetail);
+    public ResponseEntity<?> add(@Valid @RequestBody CvDetail cvDetail) {
+        return ResponseEntity.ok(cvDetailService.add(cvDetail));
     }
 
-    @PostMapping("/uploadPhoto")
-    public Result uploadPhoto(@RequestParam("file") MultipartFile photoFile,@RequestParam int candidateId) {
-        return this.cvDetailService.uploadPhoto(photoFile,candidateId);
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadPhoto(@RequestParam("file") MultipartFile file,@RequestParam int candidateId) {
+        return ResponseEntity.ok(cvDetailService.uploadPhoto(file,candidateId));
     }
-
-
-    @GetMapping("/getByCandidateId")
-    public DataResult<CvDetail> getByCandidateId(@RequestParam int candidateId){
-        return cvDetailService.getByCandidateId(candidateId);
-    }
-
 
 
 

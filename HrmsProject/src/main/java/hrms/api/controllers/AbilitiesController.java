@@ -5,6 +5,7 @@ import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.Abilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +22,13 @@ public class AbilitiesController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<Abilities>> getAll() {
-        return this.abilitiesService.getAll();
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(abilitiesService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Abilities abilities) {
-        return this.abilitiesService.add(abilities);
+    public ResponseEntity<?> add(@RequestBody Abilities abilities) {
+        return ResponseEntity.ok(abilitiesService.add(abilities));
     }
 
 }

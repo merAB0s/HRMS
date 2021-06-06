@@ -6,8 +6,10 @@ import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.LinkType;
 import hrms.entities.concretes.Workplaces;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,20 +17,18 @@ import java.util.List;
 public class LinkTypeController {
 
     private LinkTypeService linkTypeService;
-
     @Autowired
     public LinkTypeController(LinkTypeService linkTypeService) {
         this.linkTypeService = linkTypeService;
     }
 
-    @GetMapping("/getall")
-    public DataResult<List<LinkType>> getAll() {
-        return this.linkTypeService.getAll();
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(linkTypeService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody LinkType linkType) {
-        return this.linkTypeService.add(linkType);
+    public ResponseEntity<?> add(@Valid @RequestBody LinkType linkType){
+        return ResponseEntity.ok(linkTypeService.add(linkType));
     }
-
 }

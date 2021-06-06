@@ -6,8 +6,10 @@ import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.School;
 import hrms.entities.concretes.Workplaces;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,23 +17,19 @@ import java.util.List;
 public class WorkplaceController {
 
     private WorkplaceService workplaceService;
-
     @Autowired
     public WorkplaceController(WorkplaceService workplaceService) {
         this.workplaceService = workplaceService;
     }
 
-    @GetMapping("/getall")
-    public DataResult<List<Workplaces>> getAll() {
-        return this.workplaceService.getAll();
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(workplaceService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Workplaces workplaces) {
-        return this.workplaceService.add(workplaces);
+    public ResponseEntity<?> add(@Valid @RequestBody Workplaces workplace){
+        return ResponseEntity.ok(workplaceService.add(workplace));
     }
-
-
-
 
 }

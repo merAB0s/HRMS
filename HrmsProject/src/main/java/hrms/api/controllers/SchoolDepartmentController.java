@@ -5,8 +5,10 @@ import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.SchoolDepartment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,15 +22,13 @@ public class SchoolDepartmentController {
         this.schoolDepartmentService = schoolDepartmentService;
     }
 
-
-
     @GetMapping("/getall")
-    public DataResult<List<SchoolDepartment>> getAll() {
-        return this.schoolDepartmentService.getAll();
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(this.schoolDepartmentService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody SchoolDepartment schoolDepartment) {
-        return this.schoolDepartmentService.add(schoolDepartment);
+    public ResponseEntity<?> add(@Valid @RequestBody SchoolDepartment schoolDepartment){
+        return ResponseEntity.ok(this.schoolDepartmentService.add(schoolDepartment));
     }
 }

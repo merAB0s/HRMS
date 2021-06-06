@@ -15,4 +15,7 @@ public interface WorkplaceCandidateService {
     DataResult<List<WorkplaceCandidate>> getByCandidateId(int candidateId);
 
     Result add(WorkplaceCandidate workplaceCandidate);
+
+    DataResult<List<WorkplaceCandidate>> getByCandidateIdOrderByDateOfQuitDesc(int candidateId);
+
 }

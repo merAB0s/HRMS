@@ -4,6 +4,7 @@ import java.util.List;
 
 import hrms.entities.dtos.JobAdvertisementAndEmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +17,8 @@ import hrms.business.abstracts.JobAdvertisementService;
 import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.JobAdvertisement;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/jobAdvertisements")
@@ -30,44 +33,41 @@ public class JobAdvertisementController {
 	}
 
 	@GetMapping("/getall")
-	public DataResult<List<JobAdvertisement>> getAll() {
-
-		return this.jobAdvertisementService.getAll();
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(this.jobAdvertisementService.getAll());
 	}
 
 	@GetMapping("/getAllByIsActiveTrue")
-	public DataResult<List<JobAdvertisement>> getAllByIsActiveTrue() {
-		return this.jobAdvertisementService.getAllByIsActiveTrue();
+	public ResponseEntity<?> getAllByIsActiveTrue(){
+		return ResponseEntity.ok(this.jobAdvertisementService.getAllByIsActiveTrue());
 	}
 
 	@GetMapping("/getByisActiveTrueOrderByApplicationDeadlineAsc")
-	public DataResult<List<JobAdvertisement>> getByisActiveTrueOrderByApplicationDeadlineAsc() {
-		return this.jobAdvertisementService.getByisActiveTrueOrderByApplicationDeadlineAsc();
+	public ResponseEntity<?> getByisActiveTrueOrderByApplicationDeadlineAsc(){
+		return ResponseEntity.ok(this.jobAdvertisementService.getByisActiveTrueOrderByApplicationDeadlineAsc());
 	}
 
 	@GetMapping("/getByisActiveTrueAndEmployerId")
-	public DataResult<List<JobAdvertisement>> getByisActiveTrueAndEmployerId(int id) {
-		return this.jobAdvertisementService.getByisActiveTrueAndEmployerId(id);
+	public ResponseEntity<?> getByisActiveTrueAndEmployerId(int id){
+		return ResponseEntity.ok(this.jobAdvertisementService.getByisActiveTrueAndEmployerId(id));
 	}
 
-	@GetMapping("getAdvertisementWithEmployerDetails")
-	public DataResult<List<JobAdvertisementAndEmployerDto>> getAdvertisementWithEmployerDetails(){
-		return this.jobAdvertisementService.getAdvertisementWithEmployerDetails();
+	@GetMapping("/getAdvertisementWithEmployerDetails")
+	public ResponseEntity<?> getAdvertisementWithEmployerDetails(){
+		return ResponseEntity.ok(this.jobAdvertisementService.getAdvertisementWithEmployerDetails());
 	}
 
-
-
-		@PostMapping("/add")
-	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
-
-		return this.jobAdvertisementService.add(jobAdvertisement);
+	@PostMapping("/add")
+	public ResponseEntity<?> add(@Valid @RequestBody JobAdvertisement jobAdvertisement){
+		return ResponseEntity.ok(this.jobAdvertisementService.add(jobAdvertisement));
 	}
-	
+
 	@PutMapping("/update")
-	public Result update(@RequestParam int id,@RequestBody JobAdvertisement jobAdvertisement) {
-		return this.jobAdvertisementService.update(id, jobAdvertisement);
+	public ResponseEntity<?> update(@RequestParam int id,@Valid @RequestBody JobAdvertisement jobAdvertisement){
+		return ResponseEntity.ok(this.jobAdvertisementService.update(id , jobAdvertisement));
 	}
-	
+
+
 	
 	
 	

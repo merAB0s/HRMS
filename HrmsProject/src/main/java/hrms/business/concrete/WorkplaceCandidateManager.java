@@ -38,4 +38,9 @@ public class WorkplaceCandidateManager implements WorkplaceCandidateService {
         workplaceCandidateDao.save(workplaceCandidate);
         return new SuccessResult("Başarıyla Eklendi.");
     }
+
+    @Override
+    public DataResult<List<WorkplaceCandidate>> getByCandidateIdOrderByDateOfQuitDesc(int candidateId) {
+        return new SuccessDataResult<List<WorkplaceCandidate>>(workplaceCandidateDao.getByCandidate_IdOrderByDateOfQuitDesc(candidateId));
+    }
 }

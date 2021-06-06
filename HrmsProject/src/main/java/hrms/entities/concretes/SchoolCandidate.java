@@ -1,6 +1,7 @@
 package hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "school_candidates")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class SchoolCandidate {
 
     @Id
@@ -33,7 +35,7 @@ public class SchoolCandidate {
     private LocalDate dateOfEntry;
 
     @Column(name = "date_of_graduation")
-    private LocalDate dateOfGradautaion;
+    private LocalDate dateOfGraduataion;
 
 
 

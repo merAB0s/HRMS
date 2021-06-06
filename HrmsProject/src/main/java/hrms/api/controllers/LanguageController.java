@@ -5,8 +5,10 @@ import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.Language;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,14 +22,13 @@ public class LanguageController {
         this.languageService = languageService;
     }
 
-
     @GetMapping("/getall")
-    public DataResult<List<Language>> getAll() {
-        return this.languageService.getAll();
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(languageService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Language language) {
-        return this.languageService.add(language);
+    public ResponseEntity<?> add(@Valid @RequestBody Language language){
+        return ResponseEntity.ok(languageService.add(language));
     }
 }

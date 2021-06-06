@@ -3,6 +3,7 @@ package hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,10 +15,12 @@ import hrms.core.utilities.results.DataResult;
 import hrms.core.utilities.results.Result;
 import hrms.entities.concretes.JobTitle;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/jobtitles")
 public class JobTitleController {
-	
+
 	private JobTitleService jobTitleService;
 
 
@@ -26,15 +29,14 @@ public class JobTitleController {
 		super();
 		this.jobTitleService = jobTitleService;
 	}
-	
+
 	@GetMapping("/getall")
-	public DataResult<List<JobTitle>>  getAll(){
-		return this.jobTitleService.getAll();
-	}
-	
-	@PostMapping("/add")
-	public Result add(@RequestBody JobTitle jobTitle){
-		return this.jobTitleService.add(jobTitle);
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(this.jobTitleService.getAll());
 	}
 
+	@PostMapping("/add")
+	public ResponseEntity<?> add(@Valid @RequestBody JobTitle jobTitle){
+		return ResponseEntity.ok(this.jobTitleService.add(jobTitle));
+	}
 }

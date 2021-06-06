@@ -40,4 +40,9 @@ public class SchoolCandidateManager implements SchoolCandidateService {
         schoolCandidateDao.save(schoolCandidate);
         return new SuccessResult("Başarıyla Eklendi.");
     }
+
+    @Override
+    public DataResult<List<SchoolCandidate>> getByCandidateIdOrderByDateOfGraduationDesc(int candidateId) {
+        return new SuccessDataResult<List<SchoolCandidate>>(schoolCandidateDao.getByCandidate_IdOrderByDateOfGraduataion(candidateId));
+    }
 }

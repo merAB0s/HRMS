@@ -14,4 +14,7 @@ public interface SchoolCandidateService {
     DataResult<List<SchoolCandidate>> getByCandidateId(int candidateId);
 
     Result add(SchoolCandidate schoolCandidate);
+
+    DataResult<List<SchoolCandidate>> getByCandidateIdOrderByDateOfGraduationDesc(int candidateId);
+
 }

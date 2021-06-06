@@ -7,8 +7,10 @@ import hrms.entities.concretes.LinkType;
 import hrms.entities.concretes.SocialMedia;
 import hrms.entities.concretes.WorkplaceCandidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,25 +18,24 @@ import java.util.List;
 public class SocialMediaController {
 
     private SocialMediaService socialMediaService;
-
     @Autowired
     public SocialMediaController(SocialMediaService socialMediaService) {
         this.socialMediaService = socialMediaService;
     }
 
-    @GetMapping("/getall")
-    public DataResult<List<SocialMedia>> getAll() {
-        return this.socialMediaService.getAll();
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(socialMediaService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody SocialMedia socialMedia) {
-        return this.socialMediaService.add(socialMedia);
+    public ResponseEntity<?> add(@Valid @RequestBody SocialMedia socialMedia){
+        return ResponseEntity.ok(socialMediaService.add(socialMedia));
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<SocialMedia>> getByCandidateId(@RequestParam int candidateId){
-        return socialMediaService.getByCandidateId(candidateId);
+    public ResponseEntity<?> getByCandidateId(@RequestParam int candidateId){
+        return ResponseEntity.ok(socialMediaService.getByCandidateId(candidateId));
     }
 
 }

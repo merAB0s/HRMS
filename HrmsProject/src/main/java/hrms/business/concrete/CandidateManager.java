@@ -61,15 +61,13 @@ public class CandidateManager implements CandidateService {
 
 		Result result = BusinessRules.run(identityNumberControl(candidate));
 
-		if (result.isSuccess()) {
+		if(result.isSuccess()) {
 			candidateDao.save(candidate);
-
 			activationCodeService.sendVerificationCode(candidate.getId());
-			return new SuccessResult("Başarıyla Aday Eklendi!");
+			return new SuccessResult("Eklendi");
+
 		}
-
-		return new ErrorResult(result.getMessage());
-
+		return result;
 	}
 
 	@Override
@@ -87,13 +85,6 @@ public class CandidateManager implements CandidateService {
 
 	///////////////// KURALLAR////////////////////////
 
-	private Result mernisControl(Candidate candidate) {
-
-		if (validationService.validate(candidate) == false) {
-			return new ErrorResult("Mernis doğrulaması gerçekleşmedi");
-		}
-		return new SuccessResult();
-	}
 
 	private Result identityNumberControl(Candidate candidate) {
 
@@ -102,5 +93,6 @@ public class CandidateManager implements CandidateService {
 		}
 		return new SuccessResult();
 	}
+
 
 }

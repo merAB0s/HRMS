@@ -1,11 +1,14 @@
 package hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -13,6 +16,7 @@ import java.util.List;
 @Table(name = "language_levels")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","languageCandiates"})
 public class LanguageLevel {
 
     @Id
@@ -21,6 +25,8 @@ public class LanguageLevel {
     @Column(name = "id")
     private int id;
 
+    @NotBlank
+    @NotNull
     @Column(name = "languages_level_name")
     private String levelName;
 

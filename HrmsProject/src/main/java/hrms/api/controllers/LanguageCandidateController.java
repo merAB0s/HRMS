@@ -7,8 +7,10 @@ import hrms.entities.concretes.Language;
 import hrms.entities.concretes.LanguageCandidate;
 import hrms.entities.concretes.WorkplaceCandidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,25 +18,24 @@ import java.util.List;
 public class LanguageCandidateController {
 
     private LanguageCandidateService languageCandidateService;
-
     @Autowired
     public LanguageCandidateController(LanguageCandidateService languageCandidateService) {
         this.languageCandidateService = languageCandidateService;
     }
 
-    @GetMapping("/getall")
-    public DataResult<List<LanguageCandidate>> getAll() {
-        return this.languageCandidateService.getAll();
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(languageCandidateService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody LanguageCandidate languageCandidate) {
-        return this.languageCandidateService.add(languageCandidate);
+    public ResponseEntity<?> add(@Valid @RequestBody LanguageCandidate languageCandiate){
+        return ResponseEntity.ok(languageCandidateService.add(languageCandiate));
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<LanguageCandidate>> getByCandidatId(@RequestParam int candidateId){
-        return languageCandidateService.getByCandidateId(candidateId);
+    public ResponseEntity<?> getByCandidateId(@RequestParam int candidateId){
+        return ResponseEntity.ok(languageCandidateService.getByCandidateId(candidateId));
     }
 
 

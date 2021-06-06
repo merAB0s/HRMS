@@ -8,4 +8,6 @@ import java.util.List;
 public interface WorkplaceCandidateDao extends JpaRepository<WorkplaceCandidate, Integer> {
 
     List<WorkplaceCandidate> getByCandidate_Id(int candidateId);
+    List<WorkplaceCandidate> getByCandidate_IdOrderByDateOfQuitDesc(int candidateId);
+
 }

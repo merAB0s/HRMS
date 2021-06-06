@@ -9,38 +9,43 @@ import hrms.entities.concretes.SchoolCandidate;
 import hrms.entities.concretes.SocialMedia;
 import hrms.entities.concretes.WorkplaceCandidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/schoolcandidate")
 public class SchoolCandidateController {
 
-
-    private SchoolCandidateService schoolCandidateServiceService;
+    private SchoolCandidateService schoolCandidateService;
 
     @Autowired
-    public SchoolCandidateController(SchoolCandidateService schoolCandidateServiceService) {
-        this.schoolCandidateServiceService = schoolCandidateServiceService;
+    public SchoolCandidateController(SchoolCandidateService schoolCandidateService) {
+        this.schoolCandidateService = schoolCandidateService;
     }
 
-
-
     @GetMapping("/getall")
-    public DataResult<List<SchoolCandidate>> getAll() {
-        return this.schoolCandidateServiceService.getAll();
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(this.schoolCandidateService.getAll());
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody SchoolCandidate schoolCandidate) {
-        return this.schoolCandidateServiceService.add(schoolCandidate);
+    public ResponseEntity<?> add(@Valid @RequestBody SchoolCandidate schoolCandidate){
+        return ResponseEntity.ok(this.schoolCandidateService.add(schoolCandidate));
     }
 
     @GetMapping("/getByCandidateId")
-    public DataResult<List<SchoolCandidate>> getByCandidateId(@RequestParam int candidateId){
-        return schoolCandidateServiceService.getByCandidateId(candidateId);
+    public ResponseEntity<?> getByCandidateId(@RequestParam int candidateId){
+        return ResponseEntity.ok(schoolCandidateService.getByCandidateId(candidateId));
     }
+
+    @GetMapping("/getByCandidateIdOrderByDateOfGraduationDesc")
+    public ResponseEntity<?> getByCandidateIdOrderByDateOfGraduationDesc(int candidateId){
+        return ResponseEntity.ok(schoolCandidateService.getByCandidateIdOrderByDateOfGraduationDesc(candidateId));
+    }
+
 
 
 }
